@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0b1220;
+  --color-panel: #111a2e;
+  --color-panel-2: #16223b;
+  --color-edge: #243450;
+  --color-brand: #38bdf8;
+  --color-brand-2: #22d3ee;
+  /* foreground used on top of the bright brand colour (buttons, checkbox) */
+  --color-onbrand: #07111f;
+
+  /* Bump the smallest text tier so dense tables/labels stay readable. */
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.45;
+
+  /* Tighter corner radii on containers (roughly halved from defaults). */
+  --radius-sm: 0.1875rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.3125rem;
+  --radius-xl: 0.4375rem;
+  --radius-2xl: 0.5rem;
+  --radius-3xl: 0.75rem;
+}
+
+/* Slightly larger base type — bumps all rem-based text/spacing a touch. */
+:root {
+  font-size: 17px;
+}
+
+/* ---------- Dark theme (default) ---------- */
+:root {
+  color-scheme: dark;
+  --app-bg: radial-gradient(1200px 600px at 80% -10%, #16223b 0%, #0b1220 55%);
+  --app-fg: #e6edf6;
+}
+
+/* ---------- Light theme ---------- */
+.light {
+  color-scheme: light;
+  --app-bg: radial-gradient(1200px 600px at 80% -10%, #eaf1ff 0%, #f5f8fc 55%);
+  --app-fg: #0f1729;
+
+  /* Surface / accent tokens */
+  --color-ink: #eef2f8; /* used as translucent bg-ink/* surfaces */
+  --color-panel: #ffffff; /* cards */
+  --color-panel-2: #e9eef6; /* sticky table header */
+  --color-edge: #d3dbe8; /* borders */
+  --color-brand: #0284c7; /* deeper sky for contrast on white */
+  --color-brand-2: #0e7490;
+  --color-onbrand: #ffffff; /* white text on the deeper brand */
+
+  /* Remap slate so the light-on-dark text shades become dark-on-light. */
+  --color-slate-100: #1e293b;
+  --color-slate-200: #273449;
+  --color-slate-300: #334155;
+  --color-slate-400: #5b6b85;
+  --color-slate-600: #c2cdda;
+
+  /* Darken the status text shades for contrast on light tints. */
+  --color-emerald-300: #047857;
+  --color-green-300: #15803d;
+  --color-amber-300: #b45309;
+  --color-orange-300: #c2410c;
+  --color-rose-300: #be123c;
+  --color-rose-200: #9f1239;
+}
+
+html,
+body {
+  background: var(--app-bg);
+  color: var(--app-fg);
+  min-height: 100%;
+}
+
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* thin scrollbars for tables */
+.scrollbar-thin::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: var(--color-edge);
+  border-radius: 8px;
+}

@@ -1,0 +1,20 @@
+# Python
+.env
+__pycache__/
+*.pyc
+dist/
+*.egg-info/
+.venv/
+
+# Backend output
+backend/output/*.json
+backend/output/*.md
+!backend/output/.gitkeep
+
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/.env.local
+
+# Build artifacts
+frontend/build.log
