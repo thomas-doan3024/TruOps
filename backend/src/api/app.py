@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+import os
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
@@ -26,15 +27,21 @@ app = FastAPI(
     version="1.0.0",
 )
 
-# Frontend dev origins. Adjust for deployment.
+# Local dev origins, plus any extra origins from the FRONTEND_ORIGINS env var
+# (comma-separated) so the deployed Vercel domain can be added without a code change.
+_dev_origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:3001",
+    "http://127.0.0.1:3001",
+]
+_env_origins = [o.strip() for o in os.environ.get("FRONTEND_ORIGINS", "").split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:3001",
-        "http://127.0.0.1:3001",
-    ],
+    allow_origins=_dev_origins + _env_origins,
+    # Allow Vercel production and preview deployments (e.g. tru-ops-git-*.vercel.app).
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_methods=["*"],
     allow_headers=["*"],
 )
